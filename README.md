@@ -33,7 +33,7 @@ This is the official Pytorch implementation of our paper:
 
 - `2024/11` :fire: We collect a new testset [`DiTFake`](https://huggingface.co/datasets/lioooox/DiTFake), comprising three SOTA DiT-based generators (i.e., Flux, PixArt, and SD3). We hope this dataset could facilitate more comprehensive evaluations for SID.
 
-- `2024/11` :tada: Our paper is accepted by KDD2025 ADS Track.
+- `2024/11` :tada: Our paper is accepted to KDD2025 ADS Track.
 
 ## 📄 Requirements
 
