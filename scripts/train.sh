@@ -1,5 +1,5 @@
 
-GPU_NUM=4
+GPU_NUM=1
 WORLD_SIZE=1
 RANK=0
 MASTER_ADDR=localhost
@@ -14,10 +14,10 @@ DISTRIBUTED_ARGS="
 "
 
 train_datasets=(
-    "data/datasets/train_ForenSynths/train" \
+    "data/datasets/train_DeepFail/train" \
 )
 eval_datasets=(
-    "data/datasets/train_ForenSynths/val" \
+    "data/datasets/train_DeepFail/val" \
 )
 
 MODEL="SAFE"
@@ -32,17 +32,17 @@ do
         mkdir -p $OUTPUT_PATH
 
         python -m torch.distributed.launch $DISTRIBUTED_ARGS main_finetune.py \
-            --input_size 256 \
+            --input_size 384 \
             --transform_mode 'crop' \
             --model $MODEL \
             --data_path "$train_dataset" \
             --eval_data_path "$eval_dataset" \
             --save_ckpt_freq 1 \
             --batch_size 32 \
-            --blr 1e-2 \
-            --weight_decay 0.01 \
+            --blr 5e-3 \
+            --weight_decay 0.05 \
             --warmup_epochs 1 \
-            --epochs 20 \
+            --epochs 25 \
             --num_workers 16 \
             --output_dir $OUTPUT_PATH \
         2>&1 | tee -a $OUTPUT_PATH/log_train.txt
