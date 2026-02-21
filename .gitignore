@@ -1,0 +1,7 @@
+__pycache__
+.vscode
+
+# Ignore data
+checkpoint/*.csv
+data/datasets
+results
