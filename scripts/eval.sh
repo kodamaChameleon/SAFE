@@ -1,5 +1,5 @@
 
-GPU_NUM=4
+GPU_NUM=1
 WORLD_SIZE=1
 RANK=0
 MASTER_ADDR=localhost
@@ -17,10 +17,11 @@ MODEL="SAFE"
 RESUME_PATH="./checkpoint"
 
 eval_datasets=(
-    "data/datasets/test1_ForenSynths/test" \
-    "data/datasets/test2_Self-Synthesis/test" \
-    "data/datasets/test3_Ojha/test" \
-    "data/datasets/test4_GenImage/test" \
+    # "data/datasets/test1_ForenSynths/test" \
+    # "data/datasets/test2_Self-Synthesis/test" \
+    # "data/datasets/test3_Ojha/test" \
+    # "data/datasets/test4_GenImage/test" \
+    "data/datasets/test5_DeepFail/test" \
 )
 for eval_dataset in "${eval_datasets[@]}"
 do
@@ -32,6 +33,6 @@ do
         --batch_size 256 \
         --num_workers 16 \
         --output_dir $RESUME_PATH \
-        --resume $RESUME_PATH/checkpoint-best.pth \
+        --resume $RESUME_PATH/checkpoint-best-COMBO-25.pth \
         --eval True
 done
