@@ -21,7 +21,8 @@ eval_datasets=(
     # "data/datasets/test2_Self-Synthesis/test" \
     # "data/datasets/test3_Ojha/test" \
     # "data/datasets/test4_GenImage/test" \
-    "data/datasets/test5_DeepFail/test" \
+    "data/datasets/test5_Imposter/test"
+    "data/datasets/test5_Imposter-Social/test"
 )
 for eval_dataset in "${eval_datasets[@]}"
 do
@@ -33,6 +34,6 @@ do
         --batch_size 256 \
         --num_workers 16 \
         --output_dir $RESUME_PATH \
-        --resume $RESUME_PATH/checkpoint-best-COMBO-25.pth \
+        --resume $RESUME_PATH/checkpoint-best-HYBRID-25.pth \
         --eval True
 done
