@@ -351,7 +351,7 @@ def main(args):
             vals = sorted(os.listdir(args.eval_data_path))
 
         rows = [["{} model testing on...".format(args.resume)],
-            ['testset', 'accuracy', 'avg precision']]
+            ['testset', 'accuracy', 'avg_precision', 'precision', 'recall', 'f1', 'roc_auc', 'tn', 'fp', 'fn', 'tp']]
 
         for v_id, val in enumerate(vals):
             
@@ -376,13 +376,25 @@ def main(args):
                 drop_last=False
             )
 
-            test_stats, acc, ap = evaluate(data_loader_val, model, device, val)
+            test_stats, acc, ap, precision, recall, f1, roc_auc, tn, fp, fn, tp = evaluate(data_loader_val, model, device, val)
             print(f"Accuracy of the network on {len(dataset_val)} test images: {test_stats['acc1']:.2%}")
 
             print(f"test dataset is {val} acc: {acc:.2%}, ap: {ap:.2%}")
             print("***********************************")
     
-            rows.append([val, acc * 100, ap * 100])
+            rows.append([
+                val,
+                acc * 100,
+                ap * 100,
+                precision * 100,
+                recall * 100,
+                f1 * 100,
+                roc_auc * 100,
+                tp,
+                fp,
+                fn,
+                tn
+            ])
 
         def calculate_column_means(rows):
             if not rows or len(rows[0]) < 2:

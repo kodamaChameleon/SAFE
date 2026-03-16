@@ -19,7 +19,12 @@ from utils import adjust_learning_rate
 from scipy.special import softmax
 from sklearn.metrics import (
     average_precision_score, 
-    accuracy_score
+    accuracy_score,
+    confusion_matrix,
+    precision_score,
+    recall_score,
+    f1_score,
+    roc_auc_score
 )
 
 
@@ -188,4 +193,29 @@ def evaluate(data_loader, model, device, val=None, use_amp=False):
     acc = accuracy_score(y_true, y_pred > 0.5)
     ap = average_precision_score(y_true, y_pred)
 
-    return {k: meter.global_avg for k, meter in metric_logger.meters.items()}, acc, ap
+    # Add additional metrics
+    y_label = (y_pred > 0.5).astype(int)
+
+    cm = confusion_matrix(y_true, y_label)
+    precision = precision_score(y_true, y_label)
+    recall = recall_score(y_true, y_label)
+    f1 = f1_score(y_true, y_label)
+    roc_auc = roc_auc_score(y_true, y_pred)
+
+    print("Confusion Matrix:")
+    print(cm)
+    tn, fp, fn, tp = cm.ravel()
+
+    return (
+        {k: meter.global_avg for k, meter in metric_logger.meters.items()},
+        acc,
+        ap,
+        precision,
+        recall,
+        f1,
+        roc_auc,
+        tn,
+        fp,
+        fn,
+        tp
+    )
