@@ -22,7 +22,7 @@ eval_datasets=(
     # "data/datasets/test3_Ojha/test" \
     # "data/datasets/test4_GenImage/test" \
     "data/datasets/test5_Imposter/test"
-    "data/datasets/test5_Imposter-Social/test"
+    "data/datasets/test6_Imposter-Social/test"
 )
 for eval_dataset in "${eval_datasets[@]}"
 do
