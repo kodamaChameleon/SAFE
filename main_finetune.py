@@ -351,7 +351,7 @@ def main(args):
             vals = sorted(os.listdir(args.eval_data_path))
 
         rows = [["{} model testing on...".format(args.resume)],
-            ['testset', 'accuracy', 'avg_precision', 'precision', 'recall', 'f1', 'roc_auc', 'tn', 'fp', 'fn', 'tp']]
+            ['testset', 'accuracy', 'avg_precision', 'precision', 'recall', 'f1', 'roc-auc', 'tn', 'fp', 'fn', 'tp']]
 
         for v_id, val in enumerate(vals):
             
